@@ -84,7 +84,7 @@ function LoginPage() {
   return (
     <div className="flex items-center justify-center m-20">
       {user && navigate("/")}
-      <div className=" w-25% h-auto border-2 border-black bg-[url('https://img.freepik.com/free-photo/white-painted-wall-texture-background_53876-138197.jpg?w=900&t=st=1663217679~exp=1663218279~hmac=52bc59c461c2ec74f08319c92bf3d07f0ee63b26428f078e78c28a82cb145db3')] p-6 rounded-3xl shadow-2xl bg-white ">
+      <div className=" w-25%  h-auto border-2 border-black bg-[url('https://img.freepik.com/free-photo/white-painted-wall-texture-background_53876-138197.jpg?w=900&t=st=1663217679~exp=1663218279~hmac=52bc59c461c2ec74f08319c92bf3d07f0ee63b26428f078e78c28a82cb145db3')] p-6 rounded-3xl shadow-2xl bg-white ">
         <header className="font-bold m-3 mb-5 font-sans text-center text-3xl pb-2 ">
           Login
         </header>
