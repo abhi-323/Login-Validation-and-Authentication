@@ -1,7 +1,3 @@
-from django.shortcuts import render
-from rest_framework.decorators import api_view
-from rest_framework.response import Response
-
 from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
 from rest_framework_simplejwt.views import TokenObtainPairView
 
@@ -21,13 +17,13 @@ class MyTokenObtainPairView(TokenObtainPairView):
     serializer_class = MyTokenObtainPairSerializer
 
 
-@api_view()
-def createLogin(request):
-    return Response(True)
+# @api_view()
+# def createLogin(request):
+#     return Response(True)
 
 
-@api_view()
-def loginId(request, id):
-    return Response(id)
+# @api_view()
+# def loginId(request, id):
+#     return Response(id)
 
 # Create your views here.

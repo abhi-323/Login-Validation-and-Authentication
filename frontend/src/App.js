@@ -1,5 +1,6 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import LoginPage from "./pages/LoginPage";
+import SignupPage from "./pages/SignupPage";
 import HomePage from "./pages/HomePage";
 import NavBar from "./components/NavBar";
 import PrivateRoute from "./utils/PrivateRoute";
@@ -25,6 +26,7 @@ function App() {
           <Route element={<NavBar />} path="/">
             <Route element={<HomePage />} index />
             <Route element={<LoginPage />} path="/login" />
+            <Route element={<SignupPage />} path="/signup" />
           </Route>
         </Routes>
       </Router>

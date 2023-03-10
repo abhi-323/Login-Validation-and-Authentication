@@ -1,10 +1,11 @@
 import React from "react";
 import { Link, Outlet } from "react-router-dom";
 import { useRecoilState } from "recoil";
-import { userAtom } from "../recoil/recoil";
+import { userAtom, authTokenAtom } from "../recoil/recoil";
 
 function NavBar() {
-  const [user] = useRecoilState(userAtom);
+  const [authToken, setAuthToken] = useRecoilState(authTokenAtom);
+  const [user, setUser] = useRecoilState(userAtom);
 
   return (
     <>
@@ -14,10 +15,25 @@ function NavBar() {
         </Link>
         <span> | </span>
         {user ? (
-          <h2 className="px-4 hover:text-green-500">LOGOUT</h2>
+          <h2
+            onClick={() => {
+              setAuthToken(null);
+              setUser(null);
+              localStorage.removeItem("authToken");
+            }}
+            className="px-4 hover:text-green-500 cursor-pointer"
+          >
+            LOGOUT
+          </h2>
         ) : (
           <Link to="/login">
             <h2 className="px-4 hover:text-green-500">LOGIN</h2>
+          </Link>
+        )}
+        {!user && <span> | </span>}
+        {!user && (
+          <Link to="/signup">
+            <h2 className="px-4 hover:text-green-500">SIGN UP</h2>
           </Link>
         )}
       </div>

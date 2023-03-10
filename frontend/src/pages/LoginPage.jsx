@@ -6,24 +6,14 @@ import jwtDecode from "jwt-decode";
 import { useNavigate } from "react-router-dom";
 
 function LoginPage() {
-  const [email, setEmail] = useState(null);
-  const [password, setPassword] = useState(null);
-  const [authToken, setAuthToken] = useRecoilState(authTokenAtom);
-  const [user, setUser] = useRecoilState(userAtom);
+  let [email, setEmail] = useState(null);
+  let [password, setPassword] = useState(null);
+  let [authToken, setAuthToken] = useRecoilState(authTokenAtom);
+  let [user, setUser] = useRecoilState(userAtom);
 
   const navigate = useNavigate();
 
-  console.log(authToken);
-  // if (authToken != null) {
-  //   setUser(jwtDecode(authToken.access));
-  // }
-  // useEffect(() => {
-  //   if (localStorage.getItem("authToken")) {
-  //     // setAuthToken(JSON.parse(localStorage.getItem(authToken)));
-  //     console.log(JSON.parse(localStorage.getItem(authToken)));
-  //     // setUser(jwtDecode(authToken.access));
-  //   } else setAuthToken(null);
-  // }, []);
+  // console.log(authToken);
 
   // console.log(email);
   // console.log(password);
@@ -39,8 +29,9 @@ function LoginPage() {
 
     let data = await response.json();
 
-    if (response.status == 200) {
+    if (response.status === 200) {
       setAuthToken(data);
+      // console.log(authToken);
       setUser(jwtDecode(data.access));
       // console.log(jwtDecode(authToken.access).username);
       localStorage.setItem("authToken", JSON.stringify(data));
@@ -52,9 +43,48 @@ function LoginPage() {
     // console.log(user.username);
   };
 
+  // function logout() {
+  //   setAuthToken(null);
+  //   setUser(null);
+  //   localStorage.removeItem("authToken");
+  // }
+
+  // let updateToken = async () => {
+  //   console.log("update ", authToken);
+  //   let response = await fetch("http://127.0.0.1:8000/login/token/refresh/", {
+  //     method: "POST",
+  //     headers: {
+  //       "Content-Type": "application/json",
+  //     },
+  //     body: JSON.stringify({ refresh: authToken.refresh }),
+  //   });
+
+  //   let data = await response.json().then(() => console.log("done"));
+
+  //   if (response.status === 200) {
+  //     console.log("data");
+  //     setAuthToken(data);
+  //     setUser(jwtDecode(data.access));
+  //     // console.log("data ", data);
+  //     // console.log("authT", authToken);
+  //     localStorage.setItem("authToken", JSON.stringify(data));
+  //   } else {
+  //     console.log("logout update");
+  //     logout();
+  //   }
+  // };
+
+  // useEffect(() => {
+  //   setInterval(() => {
+  //     console.log("Hello");
+  //     if (authToken) updateToken();
+  //   }, 2000);
+  // }, []);
+
   return (
     <div className="flex items-center justify-center m-20">
-      <div className="w-1/4 h-96 border-2 border-black bg-[url('https://img.freepik.com/free-photo/white-painted-wall-texture-background_53876-138197.jpg?w=900&t=st=1663217679~exp=1663218279~hmac=52bc59c461c2ec74f08319c92bf3d07f0ee63b26428f078e78c28a82cb145db3')] p-6 rounded-3xl shadow-2xl bg-white ">
+      {user && navigate("/")}
+      <div className=" w-25% h-auto border-2 border-black bg-[url('https://img.freepik.com/free-photo/white-painted-wall-texture-background_53876-138197.jpg?w=900&t=st=1663217679~exp=1663218279~hmac=52bc59c461c2ec74f08319c92bf3d07f0ee63b26428f078e78c28a82cb145db3')] p-6 rounded-3xl shadow-2xl bg-white ">
         <header className="font-bold m-3 mb-5 font-sans text-center text-3xl pb-2 ">
           Login
         </header>
@@ -107,7 +137,7 @@ function LoginPage() {
         <footer className="text-center m-4">
           <h2>
             Not a member? &nbsp;
-            <a className=" font-bold hover:text-green-500" href="/">
+            <a className=" font-bold hover:text-green-500" href="/signup">
               Sign up
             </a>
           </h2>
