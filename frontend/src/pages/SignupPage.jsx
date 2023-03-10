@@ -40,7 +40,7 @@ function SignupPage() {
 
     if (response.status === 201) {
       alert("User Registration Successful");
-      navigate("/");
+      navigate("/login");
     } else {
       {
         data.email && alert(data.email);
