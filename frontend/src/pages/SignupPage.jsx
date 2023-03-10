@@ -11,6 +11,7 @@ function SignupPage() {
   let [email, setEmail] = useState(null);
   let [password, setPassword] = useState(null);
   let [confirmPassword, setConfirmPassword] = useState(null);
+  let [userData, setUserData] = useState(null);
   //   let [authToken, setAuthToken] = useRecoilState(authTokenAtom);
   let [user, setUser] = useRecoilState(userAtom);
 
@@ -33,21 +34,21 @@ function SignupPage() {
     });
 
     let data = await response.json();
+    setUserData(data);
 
     console.log(data);
 
-    // if (response.status === 200) {
-    //   setAuthToken(data);
-    //   // console.log(authToken);
-    //   setUser(jwtDecode(data.access));
-    //   // console.log(jwtDecode(authToken.access).username);
-    //   localStorage.setItem("authToken", JSON.stringify(data));
-    //   navigate("/");
-    // } else {
-    //   alert("Incorrect email or password");
-    // }
-    // console.log(authToken);
-    // console.log(user.username);
+    if (response.status === 201) {
+      alert("User Registration Successful");
+      navigate("/");
+    } else {
+      {
+        data.email && alert(data.email);
+      }
+      {
+        data.username && alert(data.username);
+      }
+    }
   };
 
   return (
